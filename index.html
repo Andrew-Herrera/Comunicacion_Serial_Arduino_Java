@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="Es">
+<head>
+    <meta charset="UTF-8">
+    <!--direccionario de caracteres-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Con esta meta, le decimos al navegar que adapte nuestro contenido a dispositivos moviles-->
+    <link rel="stylesheet" href="diseño.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@1,200&display=swap" rel="stylesheet">
+    <!--Cambiando la fuente de la letra-->
+    <title>COMUNICACION SERIAL (JAVA-ARDUINO)</title>
+</head>
+<body>
+    <header></header>
+    <main>
+        <section class="introduccion">
+        <!--para que es este proyecto-->
+        <h1>COMUNICACION SERIAL (JAVA-ARDUINO)</h1>
+        <p>El desarrollo de proyectos que combinan Java y Arduino ofrece una amplia gama de posibilidades para crear soluciones interactivas y conectadas. En este caso, nos centraremos en la comunicación mediante un puerto serial, que permite la transferencia de datos entre un ordenador y un dispositivo Arduino.</p>
+        <p>Java es un lenguaje de programación popular y versátil que ofrece una amplia gama de bibliotecas y herramientas para desarrollar aplicaciones de escritorio, web y móviles. Por otro lado, Arduino es una plataforma de desarrollo electrónica de código abierto que permite la creación de prototipos de hardware y el control de dispositivos mediante programación.</p>
+        <p>La comunicación entre Java y Arduino a través de un puerto serial implica el establecimiento de una conexión física entre el ordenador y el Arduino utilizando un cable USB. Una vez establecida la conexión, se puede utilizar amplia variedad de bibliotecas para facilitar la comunicación serial en el lado de Java. </p>
+        </section>
+        <section class="esquemas">
+            <h2>ESQUEMAS</h2>
+            <!--diagramas del proyecto, esquemas, lista de componentes-->
+            <a href="archivos/esquematico.pdf" download="esquematico">
+                <img class="img" src="imagenes/img_esquematico.jpg" alt="Esquematico del proyecto">
+            </a>
+            <p>*** presiona la imagen para descargar el esquema en formato pdf</p>
+            <img class="img" src="imagenes/img_simulacion.png" alt="Simulacion del proyecto">
+        </section>
+        <section class="codigos">
+            <h2>CREDITOS</h2>
+            <p class="creditos">Este proyecto se basa en el video titulado 'Como enviar datos desde Java a Arduino[Usando la LCD]' del canal 'El Profe Ariel' en YouTube. El video proporcionó una guía clara y detallada sobre la comunicación entre Java y Arduino utilizando un puerto serial. Agradecemos al autor por su valioso contenido y orientación.  
+            <a class="link_externo" href="https://youtu.be/I-WaJp_yBhw">[LINK]</a></p>
+            <div class="arduino">
+                <!--creditos y explicacion del codigo de arduino +enlace de descarga-->
+                <h2>EXPLICACION DE CODIGO ARDUINO</h2>
+                <p>En esta seccion de nuestro sitio web, estara disponible nuestro código de arduino para su <a class="link_descarga" href="archivos/codigo_arduino.ino"> descarga</a> en un formato listo para ejecutar.</p>
+                <p>Ademas, nos enfocaremos en resaltar las partes las importantes del código, tratando de brindar una explicacion clara y precisa para que puedas comprender su funcionamiento.</p>
+                <ul>
+                    <li>
+                        <h3 class="lista_arduino"><code>
+                            #include &lt;LiquidCrystal.h&gt;
+                        </code></h3>
+                            Incluye la librería LiquidCrystal que permite controlar una pantalla LCD.
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino">LiquidCrystal lcd(12, 11, 5, 4, 3, 2);</h3>
+                        Crea un objeto lcd de la clase LiquidCrystal con los pines especificados para controlar la pantalla LCD.
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino">const int led1 = 10;</h3>
+                        Declara constantes que representan los pines para los LEDs.
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino">void setup() { ... }</h3>
+                        Inicia la función setup(), que se ejecuta una vez al inicio del programa.
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino">lcd.begin(16, 2);</h3>
+                        Inicializa la pantalla LCD con un tamaño de 16 columnas por 2 filas.
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino">Serial.begin(9600);</h3>
+                        Inicia la comunicación serie con una velocidad de baudios de 9600.
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino">pinMode(led1, OUTPUT); </h3>
+                        Configura los pines de los LEDs como salidas.
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino">lcd.setCursor(0,0); lcd.print("Bienvenidos!!");</h3>
+                        Ubica el cursor en la posición 0,0 de la pantalla y escribe "Bienvenidos!!". 
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino">void loop() { ... }</h3>
+                        Inicia la función loop(), que se ejecuta de forma repetitiva.
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino">if(Serial.available() > 0){ ... }</h3>
+                        Verifica si hay datos disponibles en el puerto serie.
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino">char opc = Serial.read();</h3>
+                        Lee un carácter del puerto serie y lo guarda en la variable opc.
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino">lcd.clear();</h3>
+                        Limpia la pantalla LCD.
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino">if...else if...else</h3>
+                        La sección if...else if...else evalúa el valor de opc para determinar qué acción tomar. Por ejemplo:<br> Si opc es igual a 'a', se muestra un mensaje en la pantalla y se enciende el LED1.
+                        <br><br>
+                        Cada sección del if...else if...else se ejecuta solo una vez cuando se recibe un comando correspondiente y se actualiza la pantalla y los LEDs en consecuencia.
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino">Serial.flush();</h3>
+                        Limpia el búfer del puerto serie.
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino">delay(1000);</h3>
+                        Agrega una pausa de 1 segundo antes de repetir el ciclo.
+                    </li>
+                </ul>
+            </div>
+            <div class="java">
+                <!--creditos y explicacion del codigo de java +enlace de descarga-->
+                <h2>EXPLICACION DE CODIGO JAVA</h2>
+                <p>En esta seccion de nuestro sitio web, esta disponible nuestro codigo de java para su <a class="link_descarga" href="archivos/proyecto_Java_Arduino.rar"> descarga</a> en un formato comprimido. <br><br> *** Es importante saber que este archivo ya trae incluida la libreria utilizada, por lo que no sera necesario tener que realizarlo por tu cuenta.</p> 
+                <p>Ademas, nos enfocaremos en resaltar las partes importantes del codigo, tratando de brindar una explicacion clara y precisa para que puedas comprender su funcionamiento.</p>
+                <Dentro>Es importnate recordar que, se necesario el uso de una libreria para la conexion serian, para nuestro proyecto se utilizara la <a class="link_libreria" href="https://fazecast.github.io/jSerialComm/"> biblioteca jSerialComm</a> la cual es una libreria de java diseñada por "fazecast" para proporcionar una forma indentendiente de la plataforma para el acceso a los puertos serie estandar sin la necesidad de librerias de terceros. <br>Dentro del link encontraras la documentacion de esta libreria y los pasos para implementarla.</p>
+
+                <h3>CLASE "arduino.java"</h3>
+                    <p>La clase "arduino" encapsula la funcionalidad de conexion, envio de datos y desconexion con el dispositivo arduino a traves de la comunicacion serial.</p>
+                <ul>
+                    <li>
+                        <h3 class="lista_arduino_java">import java.io.IOException;</h3>
+                        Se importa la clase IOException del paquete java.io para manejar excepciones relacionadas con entrada/salida.
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino_java">import com.fazecast.jSerialComm.SerialPort;</h3>
+                        Se importa la clase SerialPort del paquete com.fazecast.jSerialComm, que es parte de la biblioteca jSerialComm utilizada para la comunicación serial.<br>Se recomienda comentar al creador original en este punto.
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino_java">private SerialPort puertoSerie;  </h3>
+                        Se declara la variable "puertoSerie" de tipo SerialPort como atributo de la clase.
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino_java">public boolean conectar(int indice){...} </h3>
+                        Se define el método "conectar" que establece la conexión con el puerto serial. Toma como parámetro el índice del puerto seleccionado y utiliza los métodos de la clase SerialPort para abrir el puerto, establecer los parámetros de conexión y configurar los tiempos de espera. Luego, llama al método "estaConectado" para verificar si la conexión se estableció correctamente.
+                        <ul>
+                            <li>
+                            <h4 class="lista_arduino_java_metodo">puertoSerie = SerialPort.getCommPorts()[indice];</h4>
+                            Se asigna a la variable "puertoSerie" el puerto serie correspondiente al índice proporcionado. Se utiliza el método "getCommPorts()" de la clase SerialPort para obtener una lista de los puertos disponibles, y se accede al puerto específico utilizando el índice.
+                            </li>
+                            <li>
+                                <h4 class="lista_arduino_java_metodo">puertoSerie.openPort();</h4>
+                                Se llama al método "openPort()" del objeto "puertoSerie" para intentar abrir el puerto serie.
+                            </li>
+                            <li>
+                                <h4 class="lista_arduino_java_metodo">puertoSerie.setComPortParameters(9600, 8, 1, 0);</h4>
+                                Se utilizan los métodos "setComPortParameters()" para establecer los parámetros de la conexión. En este caso, se configura una velocidad de baudios de 9600, 8 bits de datos, 1 bit de parada y sin paridad.<br>*** La paridad es un concepto utilizado en las comunicaciones seriales para detectar y corregir errores en la transmisión de datos. Consiste en agregar un bit adicional al final de cada grupo de bits transmitidos.
+                            </li>
+                            <li>
+                                <h4 class="lista_arduino_java_metodo">puertoSerie.setComPortTimeouts(SerialPort.TIMEOUT_WRITE_BLOCKING, 0, 0);</h4>
+                                Se utiliza el método "setComPortTimeouts()" para configurar los tiempos de espera de la conexión. En este caso, se utiliza el modo "TIMEOUT_WRITE_BLOCKING" que bloquea la escritura hasta que se complete o se produzca un error.
+                            </li>
+                            <li>
+                                <h4 class="lista_arduino_java_metodo">return estaConectado();</h4>
+                                Se retorna el resultado del método "estaConectado()", que verifica si el puerto está abierto.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino_java">public static SerialPort[] getPuertosSerie() {...}</h3>
+                        el método "getPuertosSerie" es un método estático que devuelve una lista de objetos "SerialPort" que representan los puertos serie disponibles en el sistema. 
+                        <ul>
+                            <li>
+                                <h4 class="lista_arduino_java_metodo">SerialPort puertos[] = SerialPort.getCommPorts();</h4>
+                                Se declara y se inicializa una variable de tipo "SerialPort[]" llamada "puertos". Esta variable almacenará la lista de puertos serie disponibles.<br>Se llama al método estático "getCommPorts()" de la clase "SerialPort" para obtener la lista de puertos serie disponibles. Este método devuelve un array de objetos "SerialPort" que representan los puertos disponibles.
+                            </li>
+                            <li>
+                                <h4 class="lista_arduino_java_metodo">return puertos;</h4>
+                                Se devuelve el array de puertos obtenido en la línea anterior.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino_java">public boolean estaConectado() {...}</h3>
+                        el método "estaConectado()" verifica si el puerto serie está abierto o no. 
+                        <ul>
+                            <li>
+                                <h4 class="lista_arduino_java_metodo">return puertoSerie.isOpen();</h4>
+                                Se utiliza el método "isOpen()" de la variable "puertoSerie" para verificar si el puerto está abierto. Este método devuelve un valor booleano (true o false) que indica si el puerto está abierto o no.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino_java">public boolean desconectar() {...}</h3>
+                        el método "desconectar()" cierra el puerto serie.
+                        <ul>
+                            <li>
+                                <h4 class="lista_arduino_java_metodo">return puertoSerie.closePort();</h4>
+                                El método "closePort()" cierra el puerto serie y devuelve un valor booleano que indica si el cierre del puerto fue exitoso o no.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3 class="lista_arduino_java">public boolean enviarLetra(char valor) {...} </h3>
+                        El método "enviarLetra()" se encarga de enviar un valor de tipo char al puerto serie.<br><br>
+                        los metodos enviarTexto y enviarNumero funcionan del mismo modo, solo cambia en tipo de valor que envian a traves del puerto serie.
+                        <ul>
+                            <li>
+                                <h4 class="lista_arduino_java_metodo">try{...} catch(IOException ex){...}</h4>
+                                Se utiliza un bloque try-catch para manejar posibles excepciones de tipo IOException que puedan ocurrir durante la escritura en el puerto serie.
+                            </li>
+                            <li>
+                                <h4 class="lista_arduino_java_metodo">puertoSerie.getOutputStream().write(valor);</h4>
+                                Se llama al método "write()" del flujo de salida ("OutputStream") del objeto "puertoSerie" para escribir el valor char en el puerto serie.
+                            </li>
+                            <li>
+                                <h4 class="lista_arduino_java_metodo">puertoSerie.getOutputStream().flush();</h4>
+                                Se llama al método "flush()" del flujo de salida para asegurarse de que los datos se envíen completamente.
+                            </li>
+                            <li>
+                                <h4 class="lista_arduino_java_metodo">return true/false</h4>
+                                Se retorna true para indicar que el envío del valor fue exitoso o si ocurre una excepción de tipo IOException, se captura en el bloque catch y se retorna false para indicar que ocurrió un error en el envío del valor. 
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>INTERFAZ "interfaz.java"</h3>
+                <P>Nuestro diseño de interfaz se ha desarrollado utilizando la poderosa herramienta JFrame, ampliamente reconocida en el desarrollo de interfaces gráficas en Java. Con su flexibilidad, funcionalidad y una interfaz de programación intuitiva, hemos logrado crear una interfaz atractiva y altamente funcional para nuestra aplicación. JFrame nos ha permitido personalizar la apariencia, agregar componentes y manejar eventos de manera eficiente, mejorando la experiencia del usuario y brindando una funcionalidad sólida.</P>
+                <img class="img_interfaz" src="imagenes/interfaz.jpg" alt="diseño de la interfaz">
+                <p>En nuestra interfaz, hemos implementado la funcionalidad de todos los elementos a través de eventos MouseClicked. Esto significa que cada vez que el usuario realiza un clic con el botón principal del mouse sobre un elemento, se desencadena un evento MouseClicked asociado a ese componente en particular. </p>
+                <ul>
+                    <li>
+                        <h3 class="lista_interfaz">ComboBox</h3>
+                        En este elemento se mostrara el arreglo proporcionado por el método "cargarPuertos()" obtiene una lista de los puertos serie disponibles utilizando el objeto "obj_arduino". Luego, limpia el componente "comboBoxPuertos" y agrega los nombres de los puertos obtenidos a dicho componente. Esto permite mostrar un listado actualizado de los puertos disponibles en la interfaz gráfica.
+                            
+                    </li>
+                    <li>
+                        <h3 class="lista_interfaz">Boton - Conectar</h3>
+                        Obtiene el índice del puerto seleccionado en el ComboBox, intenta establecer la conexión utilizando el objeto "obj_arduino" y muestra mensajes de éxito o error según el resultado. Además, habilita o deshabilita ciertos elementos en la interfaz gráfica en función del estado de la conexión.
+                        <ul>
+                            <li>
+                                <h4 class="lista_interzas_elemento"> int indice = comboBoxPuertos.getSelectedIndex();</h4>
+                                Se declara una variable local llamada "indice" y se le asigna el índice de la opción seleccionada en el ComboBox "comboBoxPuertos". Esto se obtiene utilizando el método "getSelectedIndex()" del componente.
+                            </li>
+                            <li>
+                                <h4 class="lista_interzas_elemento">obj_arduino.conectar(indice);</h4>
+                                Se llama al método "conectar" del objeto "obj_arduino" pasando como parámetro el índice obtenido en el paso anterior. Esto intenta establecer la conexión utilizando el puerto seleccionado.
+                            </li>
+                            <li>
+                                <h4 class="lista_interzas_elemento">if(obj_arduino.estaConectado() == true){...}else{...}</h4>
+                                Inicia una estructura de control "if" que verifica si la conexión se ha establecido correctamente. Se utiliza el método "estaConectado()" del objeto "obj_arduino" para realizar esta verificación.
+                            </li>
+                            <li>
+                                <h4 class="lista_interzas_elemento"> JOptionPane.showMessageDialog(this, "Conexion realizada"); </h4>
+                                Si la conexión se ha establecido correctamente, se muestra un mensaje emergente utilizando JOptionPane. El mensaje indica que la conexión se ha realizado correctamente. El parámetro "this" representa la referencia al componente en el cual se muestra el mensaje.
+                            </li>
+                            <li>
+                                <h4 class="lista_interzas_elemento"> botones_habilitados(true);</h4>
+                                Se llama al método "botones_habilitados" pasando el valor "true". Esto habilita ciertos elementos relacionados con la conexión en la interfaz gráfica.
+                            </li>
+                            <li>
+                                <h4 class="lista_interzas_elemento"> JOptionPane.showMessageDialog(this, "ERROR! Conexion no realizada");</h4>
+                                Si la conexión no se ha establecido correctamente, se muestra un mensaje emergente utilizando JOptionPane. El mensaje indica que ha ocurrido un error en la conexión.
+                            </li>
+                            <li>
+                                <h4 class="lista_interzas_elemento">conectar.setBackground(Color.red);</h4>
+                                Se cambia el color de fondo del botón de conexión a rojo utilizando el método "setBackground()" y la clase "Color". Esto visualmente indica que ha ocurrido un error en la conexión.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3 class="lista_interfaz">Boton - desconectar</h3>
+                        Si la conexión está activa, envía la letra 'd' al Arduino y luego cierra la conexión. Si la conexión no está activa, muestra un mensaje de error y deshabilita ciertos elementos en la interfaz gráfica.
+                        <ul>
+                            <li>
+                                <h4 class="lista_interzas_elemento"> if(obj_arduino.estaConectado()==true){...}else{...}</h4>
+                                Inicia una estructura de control "if" que verifica si la conexión está activa. Utiliza el método "estaConectado()" del objeto "obj_arduino" para realizar esta verificación.
+                            </li>
+                            <li>
+                                <h4 class="lista_interzas_elemento">obj_arduino.enviarLetra('d');
+                                </h4>
+                                Si la conexión está activa, se llama al método "enviarLetra" del objeto "obj_arduino" y se le pasa como parámetro el valor 'd'. Esto envía la letra 'd' al Arduino, presumiblemente como una señal para indicar que se debe desconectar.
+                            </li>
+                            <li>
+                                <h4 class="lista_interzas_elemento">JOptionPane.showMessageDialog(this, "ERROR! Conexion no detectada");</h4>
+                                Si la conexión no está activa, se muestra un mensaje emergente utilizando JOptionPane. El mensaje indica que no se ha detectado la conexión. El parámetro "this" representa la referencia al componente en el cual se muestra el mensaje.
+                            </li>
+                            <li>
+                                <h4 class="lista_interzas_elemento"> botones_habilitados(false);</h4>
+                                Se llama al método "botones_habilitados" pasando el valor "false". Esto deshabilita ciertos elementos relacionados con la conexión en la interfaz gráfica, presumiblemente para evitar más errores al intentar interactuar con la conexión.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3 class="lista_interfaz">Boton - Atencion al cliente/ Ventanilla/Cajero</h3>
+                        Si la conexión está activa, envía la letra correspondiente al Arduino, presumiblemente para controlar una ventanilla. Si la conexión no está activa, muestra un mensaje de error y deshabilita ciertos elementos en la interfaz gráfica.
+                        <ul>
+                            <li>
+                                <h4 class="lista_interzas_elemento"> if(obj_arduino.estaConectado()==true){...}else{...}</h4>
+                                Inicia una estructura de control "if" que verifica si la conexión está activa. Utiliza el método "estaConectado()" del objeto "obj_arduino" para realizar esta verificación.
+                            </li>
+                            <li>
+                                <h4 class="lista_interzas_elemento">obj_arduino.enviarLetra('b');</h4>
+                                Si la conexión está activa, se llama al método "enviarLetra" del objeto "obj_arduino" y se le pasa como parámetro el valor 'b'. Esto envía la letra 'b' al Arduino, presumiblemente como una señal para indicar que se debe accionar o controlar una ventanilla.
+                            </li>
+                            <li>
+                                <h4 class="lista_interzas_elemento">JOptionPane.showMessageDialog(this, "ERROR! Conexion no detectada");   </h4>
+                                Si la conexión no está activa, se muestra un mensaje emergente utilizando JOptionPane. El mensaje indica que no se ha detectado la conexión. El parámetro "this" representa la referencia al componente en el cual se muestra el mensaje.
+                            </li>
+                            <li>
+                                <h4 class="lista_interzas_elemento">botones_habilitados(false);</h4>
+                                Se llama al método "botones_habilitados" pasando el valor "false". Esto deshabilita ciertos elementos relacionados con la conexión en la interfaz gráfica, presumiblemente para evitar más errores al intentar interactuar con la conexión.
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="resultados">
+            <h2>RESULTADOS</h2>
+            <div class="reales">
+                <!--fotos y video del resultado final-->
+                <img class="img_equipo" src="imagenes/equipo1.jpg">
+                <img class="img_equipo" src="imagenes/equipo2.jpg">
+                <br><br>
+                <img class="img_resul" src="imagenes/cajita1.jpg" alt="patalla LCD1">
+                <img class="img_resul" src="imagenes/cajita2.jpg" alt="patalla LCD2">
+                <img class="img_resul" src="imagenes/cajita3.jpg" alt="patalla LCD3">
+                <img class="img_resul" src="imagenes/cajita4.jpg" alt="patalla LCD4">
+                <br><br>
+                <video class="video" src="imagenes/video_resultados.mp4" controls>video</video>
+            </div>
+            <div class="simulacion">
+                <!--explicacion del simulador +enlace-->
+                <p>Los resultados anteriores reflejan los logros alcanzados hasta el momento. Sin embargo, te invitamos a que modifiques el proyecto y desarrolles tus propias ideas. <br> En caso de que no dispongas de los materiales necesarios, puedes acceder a la <a class="link_externo" href="https://www.tinkercad.com/things/43xbjDSwVuV?sharecode=Qb4I1g9ur83uDnEmT6fuaUQhzY7VYE4hjkir8IWKlBM">simulación</a> de Tinkercad, la cual, aunque no permite simular la comunicación serial, ofrece la función "Monitor en Serie" ubicada en la sección de código.</p>
+                <img class="img" src="imagenes/monitor_serie_simulacion.jpg" alt="muestra la funcion monitor en serie de Tinkercad">
+                <p>Recuerda que la simulación en Tinkercad es una herramienta útil para desarrollar y probar ideas antes de llevarlas a cabo en un entorno físico. Te alentamos a aprovechar esta opción para continuar expandiendo y mejorando el proyecto, y así potenciar tus propias contribuciones y creatividad.</p>
+            </div>
+        </section>
+    </main>
+    <footer></footer>
+</body>
+</html>
